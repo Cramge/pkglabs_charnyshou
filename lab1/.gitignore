@@ -1,0 +1,9 @@
+.venv/
+__pycache__/
+build/
+dist/
+.idea/
+*.spec
+!ColorLab.spec
+*.exe
+*.zip

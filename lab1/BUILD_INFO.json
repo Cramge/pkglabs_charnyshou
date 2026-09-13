@@ -1,0 +1,25 @@
+{
+  "built_at_utc": "2026-09-13T15:15:18.761742+00:00",
+  "python": "3.14.0 (tags/v3.14.0:ebf955d, Oct  7 2025, 10:15:03) [MSC v.1944 64 bit (AMD64)]",
+  "tests": "36 tests passed",
+  "dependencies": {
+    "customtkinter": "6.0.0",
+    "Pillow": "12.3.0",
+    "pyinstaller": "6.22.2"
+  },
+  "sha256": {
+    "main.py": "de8c47af791255fa66a88851f2ae77771614bd57c9a460d6d6a60c87b494ed94",
+    "controller.py": "2d8ed5b3f271875ee764375c85c856d8b369663dbcd01792be0a69aa5e646244",
+    "color_models.py": "ce073ee61e63a720c9b9f3129907bf8a30153f8360f5c39133e79d081c121a8f",
+    "test_colors.py": "5fd58db5cb7cfd14b60e678ff3ff168d238a65d7eb53315fccbc8129e01c9bad",
+    "test_extended.py": "027fbc1fbbc9d8d8d578cf905bd9b0a974879ddb29349908f067703bf5ad7b60",
+    "test_ui.py": "494231fe3565ea2089235b62750b850ccfabbfcb1446ba4f81ea45fea7b69fba",
+    "ColorLab.spec": "e288388c69d32ae34f79d441070fbca3d7ac60266db3ae5ed036f287c2f304fa",
+    "build.py": "606e309162b58e5400c1d32ece33488da0354e93c4129aa716b66fc3f801a3cf",
+    "requirements.txt": "3ebd5487fc12e6b5914debeed410ed319cad366dbe86a9b88f8155259e452558",
+    "requirements-build.txt": "0034505000aac956e6f095380f6185f33810103e5ec63f09e4602bf50b6bc731",
+    "README.md": "4f8f06961068b586abe3458175b70a841699bfa6219112f133cd9e64790b94ae",
+    "REPORT.md": "062254efdc5442a64f6c33a55585997590029747cd97ebfdc35e4174a1290aea",
+    "ColorLab.exe": "0cb4b4138196149b27f2f76c6936b51e44d264e5d677e535f68f30e5996aafc4"
+  }
+}
