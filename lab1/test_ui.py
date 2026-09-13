@@ -1,7 +1,3 @@
-"""GUI integration checks. Run explicitly: python -m unittest -v test_ui.
-
-Needs Windows/Tk display; no OS input injection or screenshot dependencies.
-"""
 import unittest
 from types import SimpleNamespace
 from main import ColorLab

@@ -1,4 +1,3 @@
-"""Independent references and invariants for all assignment modes."""
 import random
 import unittest
 from color_models import ColorEngine, SPECS, ILLUMINANTS, matvec, matmul, inverse, linearize
@@ -11,7 +10,7 @@ class MathTests(unittest.TestCase):
             self.assertAlmostEqual(x, y, delta=tolerance)
 
     def test_published_srgb_matrix(self):
-        # W3C CSS Color 4 lin_sRGB_to_XYZ rational reference, test data only.
+
         reference = ((506752/1228815,87881/245763,12673/70218),
                      (87098/409605,175762/245763,12673/175545),
                      (7918/409605,87881/737289,1001167/1053270))

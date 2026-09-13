@@ -1,4 +1,3 @@
-"""Application state and interaction logic, independent of GUI toolkits."""
 from color_models import ColorEngine, SPECS, clamp, validate, hex_color
 
 class ColorController:
@@ -25,7 +24,7 @@ class ColorController:
         if texts == [f'{v:.3f}' for v in self.values[model]]:
             return True
         try:
-            # Editing one field must not round the untouched coordinates.
+
             values = tuple(old if t == f'{old:.3f}' else float(t.replace(',', '.'))
                            for t,old in zip(texts,self.values[model]))
             if len(texts) != len(self.values[model]):

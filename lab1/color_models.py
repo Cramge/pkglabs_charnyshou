@@ -1,4 +1,3 @@
-"""Pure mathematics; RGB is sRGB D65, XYZ/Lab use the selected adapted white."""
 import math
 
 SPECS = {
@@ -8,7 +7,7 @@ SPECS = {
 }
 ILLUMINANTS = {'D65': (.3127, .3290), 'D50': (.3457, .3585), 'E': (1/3, 1/3)}
 PRIMARIES = ((.64, .33), (.30, .60), (.15, .06))
-# Fixed XYZ -> cone-response basis, NOT a ready-made RGB/XYZ conversion matrix.
+
 BRADFORD = ((.8951, .2664, -.1614), (-.7502, 1.7135, .0367), (.0389, -.0685, 1.0296))
 
 def clamp(x, lo=0.0, hi=1.0):
@@ -25,7 +24,7 @@ def matmul(a, b):
     return tuple(tuple(sum(a[i][k]*b[k][j] for k in range(3)) for j in range(3)) for i in range(3))
 
 def inverse(a):
-    """Manual Gauss-Jordan inversion with partial pivoting."""
+
     rows = [list(row) + [float(i == j) for j in range(3)] for i, row in enumerate(a)]
     for col in range(3):
         pivot = max(range(col, 3), key=lambda i: abs(rows[i][col]))
@@ -121,7 +120,7 @@ class ColorEngine:
             raise ValueError('Перед цветоделением требуется привести RGB к охвату.')
         rgb = tuple(map(clamp, rgb))
         gray = 1-max(rgb)
-        # UCR: smooth onset in shadows, suppressed for chromatic colors.
+
         t = clamp((gray-.5)/.5)
         neutrality = 1-(max(rgb)-min(rgb))
         k = gray if self.separation == 'GCR' else gray*t*t*(3-2*t)*neutrality
@@ -141,7 +140,6 @@ def hex_color(rgb):
     validate(rgb, 3)
     return '#' + ''.join(f'{round(clamp(v)*255):02X}' for v in rgb)
 
-# Compatibility helpers with D65 / GCR / Clipping defaults.
 _default = ColorEngine()
 rgb_to_lab = _default.rgb_to_lab
 lab_to_rgb = _default.lab_to_rgb

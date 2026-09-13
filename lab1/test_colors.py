@@ -10,7 +10,7 @@ class ConversionTests(unittest.TestCase):
 
     def test_reference_lab(self):
         cases = [((0,0,0), (0,0,0)), ((1,1,1), (100,0,0)),
-                 # W3C xy-defined sRGB/D65, not the former rounded XYZ white.
+
                  ((1,0,0), (53.2371,80.0901,67.2033)),
                  ((0,1,0), (87.7355,-86.1816,83.1866)),
                  ((0,0,1), (32.3009,79.1953,-107.8555))]

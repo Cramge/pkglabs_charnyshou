@@ -1,5 +1,5 @@
 {
-  "built_at_utc": "2026-09-13T15:15:18.761742+00:00",
+  "built_at_utc": "2026-09-13T15:54:52.663452+00:00",
   "python": "3.14.0 (tags/v3.14.0:ebf955d, Oct  7 2025, 10:15:03) [MSC v.1944 64 bit (AMD64)]",
   "tests": "36 tests passed",
   "dependencies": {
@@ -8,18 +8,18 @@
     "pyinstaller": "6.22.2"
   },
   "sha256": {
-    "main.py": "de8c47af791255fa66a88851f2ae77771614bd57c9a460d6d6a60c87b494ed94",
-    "controller.py": "2d8ed5b3f271875ee764375c85c856d8b369663dbcd01792be0a69aa5e646244",
-    "color_models.py": "ce073ee61e63a720c9b9f3129907bf8a30153f8360f5c39133e79d081c121a8f",
-    "test_colors.py": "5fd58db5cb7cfd14b60e678ff3ff168d238a65d7eb53315fccbc8129e01c9bad",
-    "test_extended.py": "027fbc1fbbc9d8d8d578cf905bd9b0a974879ddb29349908f067703bf5ad7b60",
-    "test_ui.py": "494231fe3565ea2089235b62750b850ccfabbfcb1446ba4f81ea45fea7b69fba",
-    "ColorLab.spec": "e288388c69d32ae34f79d441070fbca3d7ac60266db3ae5ed036f287c2f304fa",
-    "build.py": "606e309162b58e5400c1d32ece33488da0354e93c4129aa716b66fc3f801a3cf",
+    "main.py": "3d6ea7dfa537f2b4b20f2ff0f18c75b780099c5601247e0efae4a2e32c3aeb47",
+    "controller.py": "70a991483e4e51e11170d123e8bf4840d6e99195fb98fa2de033a1a1a2824249",
+    "color_models.py": "77dc7fba7c2604d80225728eced5e4227588f7e4a21e365dc8a16c199c9fab95",
+    "test_colors.py": "4005109ee271e1224e6d77e773916c8cda73ba1b02172b8969e2727df6c40b11",
+    "test_extended.py": "e2fd907bda37c93c64fe48590e5d8dcaa1883a92c2ca69969cbe27c4cc16d483",
+    "test_ui.py": "8f84cedaaebcff050bf24cba17f04fa35088b4de6f5ebe82d805814f540a4381",
+    "ColorLab.spec": "e4517b1b4ca2ae21979cbe6bf3cbe2ea8216e5e6e60393f6a6731e93bd58c5c5",
+    "build.py": "e1558a1d196c982da857f84db3c5c2baefc12113bd8db0b4c4ba64999d1f920e",
     "requirements.txt": "3ebd5487fc12e6b5914debeed410ed319cad366dbe86a9b88f8155259e452558",
     "requirements-build.txt": "0034505000aac956e6f095380f6185f33810103e5ec63f09e4602bf50b6bc731",
-    "README.md": "4f8f06961068b586abe3458175b70a841699bfa6219112f133cd9e64790b94ae",
-    "REPORT.md": "062254efdc5442a64f6c33a55585997590029747cd97ebfdc35e4174a1290aea",
-    "ColorLab.exe": "0cb4b4138196149b27f2f76c6936b51e44d264e5d677e535f68f30e5996aafc4"
+    "README.md": "ea5e5f67de659c4389fb89b55a8a6b09c15d9c8c4f9e5181c42302153b4d14ca",
+    "REPORT.md": "4c5c3c4594449b045d9f3dcc61484ba411bc3e19efcb30555b8b568a4fae5b00",
+    "ColorLab.exe": "73a5eab68ddaa1bd60ec6892be2c69fb055838e2193fef30f72fe39d1a77b95a"
   }
 }

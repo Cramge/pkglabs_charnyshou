@@ -1,4 +1,3 @@
-"""Test, build and record checksums. Run with the project virtualenv Python."""
 from datetime import datetime, timezone
 import hashlib
 import json

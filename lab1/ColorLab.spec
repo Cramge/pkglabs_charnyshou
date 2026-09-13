@@ -1,4 +1,3 @@
-# One-file Windows build. No prepared color conversion library is included.
 from PyInstaller.utils.hooks import collect_all
 datas, binaries, hiddenimports = collect_all('customtkinter')
 a = Analysis(['main.py'], pathex=[], binaries=binaries, datas=datas,

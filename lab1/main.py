@@ -1,4 +1,3 @@
-"""View: widgets and rendering only. Color state belongs to ColorController."""
 import tkinter as tk
 import customtkinter as ctk
 from PIL import Image, ImageDraw, ImageTk
@@ -11,7 +10,7 @@ def pixel(rgb, outside=False, hatch=False):
     return tuple(round(255*(.65*v+.35 if outside and hatch else v)) for v in rgb)
 
 class GradientSlider(tk.Canvas):
-    """A real gradient track with mouse dragging and keyboard navigation."""
+
     def __init__(self, parent, lo, hi, command):
         super().__init__(parent, height=28, width=256, bg='white', highlightthickness=1,
                          highlightbackground='white', highlightcolor=ACCENT, takefocus=True, cursor='hand2')
@@ -224,7 +223,7 @@ class ColorLab(ctk.CTk):
             self.matrix_box.delete('1.0','end')
             self.matrix_box.insert('1.0',c.matrix_text())
             self.matrix_box.configure(state='disabled')
-        # Throttle, do not debounce: gradients continue updating while dragging.
+
         if not self.palette_job:
             self.palette_job = self.after(30,self.draw_colors)
 
