@@ -168,6 +168,54 @@ JPEG_SOF = {
 }
 
 
+def _jpeg_exif_resolution(reader: BinaryReader, position: int, length: int):
+    if length < 14 or reader.at(position, 6, "EXIF") != b"Exif\x00\x00":
+        return None, None
+    tiff_start = position + 6
+    tiff_length = length - 6
+    header = reader.at(tiff_start, 8, "заголовок EXIF")
+    if header[:2] == b"II":
+        order = "little"
+    elif header[:2] == b"MM":
+        order = "big"
+    else:
+        return None, None
+    if int.from_bytes(header[2:4], order) != 42:
+        return None, None
+    ifd_offset = int.from_bytes(header[4:8], order)
+    if ifd_offset + 2 > tiff_length:
+        return None, None
+    ifd_position = tiff_start + ifd_offset
+    count = int.from_bytes(reader.at(ifd_position, 2, "число тегов EXIF"), order)
+    if ifd_offset + 2 + count * 12 > tiff_length:
+        return None, None
+    values = {}
+    for index in range(count):
+        entry = reader.at(ifd_position + 2 + index * 12, 12, "тег EXIF")
+        tag = int.from_bytes(entry[:2], order)
+        type_code = int.from_bytes(entry[2:4], order)
+        item_count = int.from_bytes(entry[4:8], order)
+        if tag in {282, 283} and type_code == 5 and item_count == 1:
+            value_offset = int.from_bytes(entry[8:12], order)
+            if value_offset + 8 <= tiff_length:
+                rational = reader.at(tiff_start + value_offset, 8, "разрешение EXIF")
+                numerator = int.from_bytes(rational[:4], order)
+                denominator = int.from_bytes(rational[4:], order)
+                if denominator:
+                    values[tag] = numerator / denominator
+        elif tag == 296 and type_code == 3 and item_count == 1:
+            values[tag] = int.from_bytes(entry[8:10], order)
+    dpi_x = values.get(282)
+    dpi_y = values.get(283)
+    unit = values.get(296, 2)
+    if unit == 3:
+        dpi_x = dpi_x * 2.54 if dpi_x else None
+        dpi_y = dpi_y * 2.54 if dpi_y else None
+    elif unit != 2:
+        return None, None
+    return dpi_x, dpi_y
+
+
 def _parse_jpeg(reader: BinaryReader):
     if reader.size < 4 or reader.at(0, 2, "SOI") != b"\xff\xd8":
         raise DamagedFile("Отсутствует маркер SOI")
@@ -209,6 +257,10 @@ def _parse_jpeg(reader: BinaryReader):
                         dpi_x, dpi_y = float(density_x), float(density_y)
                     elif unit == 2:
                         dpi_x, dpi_y = density_x * 2.54, density_y * 2.54
+        elif marker == 0xE1 and data_length >= 14:
+            exif_dpi_x, exif_dpi_y = _jpeg_exif_resolution(reader, data_position, data_length)
+            if exif_dpi_x is not None and exif_dpi_y is not None:
+                dpi_x, dpi_y = exif_dpi_x, exif_dpi_y
         if marker in JPEG_SOF:
             if data_length < 6:
                 raise DamagedFile("Обрезан сегмент SOF")

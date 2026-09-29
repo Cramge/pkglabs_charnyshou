@@ -42,6 +42,23 @@ def make_jpeg():
     return b"\xff\xd8" + b"\xff\xe0" + struct.pack(">H", len(app0) + 2) + app0 + b"\xff\xc0" + struct.pack(">H", len(sof) + 2) + sof + b"\xff\xda" + struct.pack(">H", len(sos) + 2) + sos + b"\x00\xff\xd9"
 
 
+def make_exif_jpeg():
+    count = 3
+    xres_offset = 8 + 2 + count * 12 + 4
+    yres_offset = xres_offset + 8
+    entries = [
+        tiff_entry(282, 5, 1, xres_offset),
+        tiff_entry(283, 5, 1, yres_offset),
+        tiff_entry(296, 3, 1, 2),
+    ]
+    tiff = b"II*\x00\x08\x00\x00\x00" + struct.pack("<H", count) + b"".join(entries) + b"\x00\x00\x00\x00"
+    tiff += struct.pack("<II", 300, 1) + struct.pack("<II", 300, 1)
+    app1 = b"Exif\x00\x00" + tiff
+    sof = b"\x08" + struct.pack(">HHB", 2, 3, 3) + b"\x01\x11\x00\x02\x11\x01\x03\x11\x01"
+    sos = b"\x03\x01\x00\x02\x11\x03\x11\x00\x3f\x00"
+    return b"\xff\xd8" + b"\xff\xe1" + struct.pack(">H", len(app1) + 2) + app1 + b"\xff\xc0" + struct.pack(">H", len(sof) + 2) + sof + b"\xff\xda" + struct.pack(">H", len(sos) + 2) + sos + b"\x00\xff\xd9"
+
+
 def tiff_entry(tag, type_code, count, value):
     if type_code == 3 and count == 1:
         field = struct.pack("<H", value) + b"\x00\x00"
@@ -151,6 +168,12 @@ class ParserTests(unittest.TestCase):
         self.assertEqual(96.0, jpeg.dpi_x)
         self.assertEqual(300.0, tiff.dpi_x)
         self.assertAlmostEqual(96.012, bmp.dpi_x, places=2)
+
+    def test_jpeg_exif_resolution(self):
+        jpeg = parse_image(self.write("exif-resolution.jpg", make_exif_jpeg()))
+        self.assertEqual("Готово", jpeg.status)
+        self.assertEqual(300.0, jpeg.dpi_x)
+        self.assertEqual(300.0, jpeg.dpi_y)
 
     def test_big_tiff_ifd(self):
         item = parse_image(self.write("sample.tif", make_big_tiff()))
